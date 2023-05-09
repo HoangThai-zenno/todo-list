@@ -4,7 +4,7 @@
 				<title-header/>
 			<b-row>
 				<control-comp/>
-				<form-comp/>
+				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm"/>
 			</b-row>
 			<list-tasks v-bind:listTasks="listTasks"/>
 		</b-container>
@@ -22,7 +22,8 @@ export default {
 	name: 'App',
 	data(){
 		return {
-			listTasks: Tasks
+			listTasks: Tasks,
+			isShowForm: false,
 		}
 	},
 	components: {
@@ -30,6 +31,11 @@ export default {
 		ControlComp,
 		FormComp,
 		ListTasks
+	},
+	methods: {
+		toggleForm(){
+			this.isShowForm = !this.isShowForm
+		}
 	}
 }
 </script>
