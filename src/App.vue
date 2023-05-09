@@ -16,28 +16,13 @@ import TitleHeader from './components/TitleHeader.vue';
 import ControlComp from './components/ControlComp.vue';
 import FormComp from './components/FormComp.vue';
 import ListTasks from './components/ListTaskTodo.vue';
+
+import Tasks from './assets/mocks/taskList'
 export default {
 	name: 'App',
 	data(){
 		return {
-			listTasks:	[
-				{
-					id: 1,
-					taskName: 'A sss',
-					level: 0
-				},
-				{
-					id: 2,
-					taskName: 'B sss',
-					level: 1
-				},
-				{
-					id: 3,
-					taskName: 'C sss',
-					level: 2
-				}
-
-			]
+			listTasks: Tasks
 		}
 	},
 	components: {

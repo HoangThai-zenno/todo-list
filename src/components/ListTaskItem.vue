@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import mapLevel from '../assets/mocks/levelTask'
 export default {
     name: 'list-task-item',
     props: {
@@ -19,28 +20,10 @@ export default {
     },
     computed: {
         getLevelName() {
-            switch (this.list.level) {
-                case 0:
-                    return 'Small';
-                case 1:
-                    return 'Medium';
-                case 2:
-                    return 'Hight';
-                default:
-                    return ''
-            }
+            return mapLevel[this.list.level].name;
         },
         classLevel(){
-            switch (this.list.level) {
-                case 0:
-                    return {'badge-info': true};
-                case 1:
-                    return {'badge-warning': true};
-                case 2:
-                    return {'badge-danger': true};
-                default:
-                    return ''
-            }
+            return mapLevel[this.list.level].class;
 
         }
     }
