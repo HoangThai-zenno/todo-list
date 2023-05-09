@@ -1,175 +1,83 @@
 <template>
-  <div id="app">
-    <div class="container">
+	<div id="app">
+		<b-container>
 
-		<!-- TITLE : START -->
-		<div class="page-header">
-			<h1>Project 01 - ToDo List <small>VueJs</small></h1>
-			<hr class="my-4">
-		</div>
-		<!-- TITLE : END -->
+			<!-- TITLE : START -->
+				<title-header/>
+			<!-- TITLE : END -->
 
 
-		<div class="row">
-			<!-- CONTROL (SEARCH + SORT + ADD) : START -->
-			<div class="col-12 col-lg-6">
-				<div class="row">
-					<!-- SORT : START -->
-					<div class="col-12">
-						<div class="form-group">
-							<div class="dropdown">
-								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Sort by
-								</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#">Name ASC</a>
-									<a class="dropdown-item" href="#">Name DESC</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Level ASC</a>
-									<a class="dropdown-item" href="#">Level DESC</a>
-								</div>
-								<span class="badge badge-success badge-medium">NAME - DESC</span>
-							</div>
-						</div>
-					</div>
-					<!-- SORT : END -->
+			<b-row>
+				<!-- CONTROL (SEARCH + SORT + ADD) : START -->
+				<control-comp/>
+				<!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
-					<!-- SEARCH : START -->
-					<div class="col-12">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for..." />
-							<span class="input-group-append">
-								<button class="btn btn-info" type="button">Clear!</button>
-							</span>
-						</div>
-					</div>
-					<!-- SEARCH : END -->
-				</div>
-			</div>
-			<!-- CONTROL (SEARCH + SORT + ADD) : END -->
+				<!-- FORM : START -->
+				<form-comp/>
+				<!-- FORM : END -->
+			</b-row>
 
-			<!-- FORM : START -->
-			<div class="col-12 col-lg-6">
-				<!-- ADD : START -->
-				<div class="form-group add-task">
-					<button type="button" class="btn btn-info btn-block">Add Task</button>
-				</div>
-				<!-- ADD : END -->
-
-				<form action="" method="POST" class="form-inline justify-content-between">
-					<div class="form-group">
-						<label class="sr-only" for="">label</label>
-						<input type="text" class="form-control" placeholder="Task Name" />
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="">label</label>
-						<select name="ds" class="form-control level" required="required">
-							<option value="0">Small</option>
-							<option value="1">Medium</option>
-							<option value="2">High</option>
-						</select>
-					</div>
-
-					<button type="button" class="btn btn-primary">Submit</button>
-					<button type="button" class="btn btn-secondary">Cancel</button>
-				</form>
-			</div>
-			<!-- FORM : END -->
-		</div>
-
-		<!-- LIST : START -->
-
-		<div class="panel panel-success">
-			<div class="panel-heading">List Task</div>
-			<table class="table table-hover ">
-				<thead>
-					<tr>
-						<th style="width: 10%" class="text-center">#</th>
-						<th>Task</th>
-						<th style="width: 20%" class="text-center">Level</th>
-						<th style="width: 160px">Action</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr>
-						<td class="text-center">1</td>
-						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-						<td class="text-center"><span class="badge badge-danger">High</span></td>
-						<td>
-							<button type="button" class="btn btn-warning">Edit</button>
-							<button type="button" class="btn btn-danger">Delete</button>
-						</td>
-					</tr>
-					<tr>
-						<td class="text-center">2</td>
-						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-						<td class="text-center"><span class="badge badge-secondary">Small</span></td>
-						<td>
-							<button type="button" class="btn btn-warning">Edit</button>
-							<button type="button" class="btn btn-danger">Delete</button>
-						</td>
-					</tr>
-					<tr>
-						<td class="text-center">3</td>
-						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-						<td class="text-center"><span class="badge badge-info">Medium</span></td>
-
-						<td>
-							<button type="button" class="btn btn-warning">Edit</button>
-							<button type="button" class="btn btn-danger">Delete</button>
-						</td>
-					</tr>
-				</tbody>
-
-			</table>
-		</div>
+			<!-- LIST : START -->
+			<list-tasks/>
+			
+		</b-container>
 	</div>
-  </div>
 </template>
 
 <script>
-
+import TitleHeader from './components/TitleHeader.vue';
+import ControlComp from './components/ControlComp.vue';
+import FormComp from './components/FormComp.vue';
+import ListTasks from './components/ListTaskTodo.vue';
 export default {
-  name: 'App',
-  components: {
-  }
+	name: 'App',
+	components: {
+		TitleHeader,
+		ControlComp,
+		FormComp,
+		ListTasks
+	}
 }
 </script>
 
 <style>
-
 body {
-    padding: 100px 0;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    vertical-align: middle;
+	padding: 100px 0;
 }
 
-.container > .row {
-    margin-top: 20px;
-    margin-bottom: 30px;
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+	vertical-align: middle;
+}
+
+.container>.row {
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
 span.badge-medium {
 	padding: 11px 10px;
-    margin: 0px 8px;
-    font-size: 16px;
-    display: inline-block;
-    vertical-align: top;
+	margin: 0px 8px;
+	font-size: 16px;
+	display: inline-block;
+	vertical-align: top;
 }
 
 @media (max-width: 992px) {
-    .add-task {
-        margin-top: 50px;
-    }
-}
-.btn.btn-warning{
-  margin-right: 10px;
-}
-.level{
-  cursor: pointer;
+	.add-task {
+		margin-top: 50px;
+	}
 }
 
+.btn.btn-warning {
+	margin-right: 10px;
+}
+
+.level {
+	cursor: pointer;
+}
 </style>
