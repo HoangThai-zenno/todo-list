@@ -1,25 +1,12 @@
 <template>
 	<div id="app">
 		<b-container>
-
-			<!-- TITLE : START -->
 				<title-header/>
-			<!-- TITLE : END -->
-
-
 			<b-row>
-				<!-- CONTROL (SEARCH + SORT + ADD) : START -->
 				<control-comp/>
-				<!-- CONTROL (SEARCH + SORT + ADD) : END -->
-
-				<!-- FORM : START -->
 				<form-comp/>
-				<!-- FORM : END -->
 			</b-row>
-
-			<!-- LIST : START -->
-			<list-tasks/>
-			
+			<list-tasks v-bind:listTasks="listTasks"/>
 		</b-container>
 	</div>
 </template>
@@ -31,6 +18,28 @@ import FormComp from './components/FormComp.vue';
 import ListTasks from './components/ListTaskTodo.vue';
 export default {
 	name: 'App',
+	data(){
+		return {
+			listTasks:	[
+				{
+					id: 1,
+					taskName: 'A sss',
+					level: 0
+				},
+				{
+					id: 2,
+					taskName: 'B sss',
+					level: 1
+				},
+				{
+					id: 3,
+					taskName: 'C sss',
+					level: 2
+				}
+
+			]
+		}
+	},
 	components: {
 		TitleHeader,
 		ControlComp,

@@ -12,9 +12,7 @@
             </thead>
             <tbody>
 
-                <list-task-item />
-                <list-task-item />
-                <list-task-item />
+                <list-task-item v-bind:list="list" v-bind:index="index+1" v-for="(list,index) in listTasks" v-bind:key="list.id"/>
 
             </tbody>
 
@@ -27,6 +25,12 @@
 import ListTaskItem from './ListTaskItem.vue';
 export default {
     name: 'list-tasks',
+    props:{
+        listTasks:{
+            type: Array,
+            defaultValue: []
+        }
+    },
     components: {
         ListTaskItem
     }
