@@ -2,11 +2,11 @@
 	<b-col cols="12" lg="6">
 		<b-row>
 			<!-- SORT : START -->
-			<control-sort />
+			<control-sort v-bind:orderBy="orderBy" v-bind:orderDir="orderDir"/>
 			<!-- SORT : END -->
 
 			<!-- SEARCH : START -->
-			<control-search v-bind:strSearch="strSearch" v-on:handleSearch = "handleSearch"/>
+			<control-search v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" />
 			<!-- SEARCH : END -->
 		</b-row>
 	</b-col>
@@ -17,15 +17,17 @@ import ControlSearch from './ControlSearch.vue';
 import ControlSort from './ControlSort.vue';
 export default {
 	name: 'control-comp',
-	props:{
-		strSearch:{type: String, default: ''}
+	props: {
+		strSearch: { type: String, default: '' },
+		orderBy: { type: String, default: 'name' },
+		orderDir: { type: String, default: 'asc' }
 	},
 	components: {
 		ControlSearch,
 		ControlSort
 	},
 	methods: {
-		handleSearch(data){
+		handleSearch(data) {
 			this.$emit('handleSearch', data)
 
 		}
