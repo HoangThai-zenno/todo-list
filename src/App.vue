@@ -3,8 +3,9 @@
 		<b-container>
 			<title-header />
 			<b-row>
-				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" />
-				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" v-bind:orderBy="orderBy" v-bind:orderDir="orderDir" />
+				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" v-bind:orderBy="orderBy"
+					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
+				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" />
 			</b-row>
 			<list-tasks v-bind:listTasks="listTaskSearch" />
 		</b-container>
@@ -25,8 +26,8 @@ export default {
 			listTasks: Tasks,
 			isShowForm: false,
 			strSearch: '',
-			orderBy: 'name',
-			orderDir: 'asc'
+			orderBy: "name",
+			orderDir: "asc"
 		}
 	},
 	components: {
@@ -56,6 +57,11 @@ export default {
 		},
 		handleSearch(data) {
 			this.strSearch = data;
+		},
+		handleSort(orderBy, orderDir) {
+			console.log(orderDir, orderBy)
+			this.orderBy = orderBy;
+			this.orderDir = orderDir;
 		}
 	}
 }

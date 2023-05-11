@@ -2,7 +2,7 @@
 	<b-col cols="12" lg="6">
 		<b-row>
 			<!-- SORT : START -->
-			<control-sort v-bind:orderBy="orderBy" v-bind:orderDir="orderDir"/>
+			<control-sort v-bind:orderBy="orderBy" v-bind:orderDir="orderDir" v-on:handleSort="handleSort"/>
 			<!-- SORT : END -->
 
 			<!-- SEARCH : START -->
@@ -30,6 +30,10 @@ export default {
 		handleSearch(data) {
 			this.$emit('handleSearch', data)
 
+		},
+		handleSort(orderBy, orderByDir) {
+			console.log(orderBy, orderByDir);
+			this.$emit('handleSort', orderBy, orderByDir)
 		}
 	}
 }
