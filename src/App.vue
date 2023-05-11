@@ -3,7 +3,7 @@
 		<b-container>
 				<title-header/>
 			<b-row>
-				<control-comp/>
+				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch"/>
 				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm"/>
 			</b-row>
 			<list-tasks v-bind:listTasks="listTasks"/>
@@ -24,6 +24,7 @@ export default {
 		return {
 			listTasks: Tasks,
 			isShowForm: false,
+			strSearch: 'aaa'
 		}
 	},
 	components: {
@@ -35,6 +36,9 @@ export default {
 	methods: {
 		toggleForm(){
 			this.isShowForm = !this.isShowForm
+		},
+		handleSearch(data){
+			this.strSearch = data;
 		}
 	}
 }
