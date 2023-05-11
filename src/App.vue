@@ -1,12 +1,12 @@
 <template>
 	<div id="app">
 		<b-container>
-				<title-header/>
+			<title-header />
 			<b-row>
-				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch"/>
-				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm"/>
+				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" />
+				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" />
 			</b-row>
-			<list-tasks v-bind:listTasks="listTaskSearch"/>
+			<list-tasks v-bind:listTasks="listTaskSearch" />
 		</b-container>
 	</div>
 </template>
@@ -20,7 +20,7 @@ import ListTasks from './components/ListTaskTodo.vue';
 import Tasks from './assets/mocks/taskList'
 export default {
 	name: 'App',
-	data(){
+	data() {
 		return {
 			listTasks: Tasks,
 			isShowForm: false,
@@ -33,24 +33,26 @@ export default {
 		FormComp,
 		ListTasks
 	},
-	computed:{
-		listTaskSearch(){
-			const {strSearch} = this;
-			var newItems = [];
-			this.listTasks.forEach(function(item) {
-				if(item.taskName.toLowerCase().includes(strSearch.toLowerCase())) {
-					newItems.push(item);
-				}
-			})
+	computed: {
+		listTaskSearch() {
+			const { strSearch } = this;
+			var newItems = this.listTasks.filter(item => {
+				return item.taskName.toLowerCase().includes(strSearch.toLowerCase())
+			});
+			// this.listTasks.forEach(function(item) {
+			// 	if(item.taskName.toLowerCase().includes(strSearch.toLowerCase())) {
+			// 		newItems.push(item);
+			// 	}
+			// })
 			return newItems
-			
+
 		}
 	},
 	methods: {
-		toggleForm(){
+		toggleForm() {
 			this.isShowForm = !this.isShowForm
 		},
-		handleSearch(data){
+		handleSearch(data) {
 			this.strSearch = data;
 		}
 	}
