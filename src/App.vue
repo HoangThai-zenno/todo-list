@@ -38,7 +38,7 @@ export default {
 			const {strSearch} = this;
 			var newItems = [];
 			this.listTasks.forEach(function(item) {
-				if(item.taskName.includes(strSearch) === true) {
+				if(item.taskName.toLowerCase().includes(strSearch.toLowerCase())) {
 					newItems.push(item);
 				}
 			})

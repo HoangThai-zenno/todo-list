@@ -10,10 +10,17 @@
                     <th style="width: 160px">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="listTasks.length !== 0">
 
                 <list-task-item v-bind:list="list" v-bind:index="index+1" v-for="(list,index) in listTasks" v-bind:key="list.id"/>
 
+            </tbody>
+            <tbody v-else>
+                <tr>
+                    <td colspan="4" style="text-align: center; color: rgb(189, 41, 41);">
+                        <h3>List Emty</h3>
+                    </td>
+                </tr>
             </tbody>
 
 
