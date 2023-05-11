@@ -6,7 +6,7 @@
 				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch"/>
 				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm"/>
 			</b-row>
-			<list-tasks v-bind:listTasks="listTasks"/>
+			<list-tasks v-bind:listTasks="listTaskSearch"/>
 		</b-container>
 	</div>
 </template>
@@ -24,7 +24,7 @@ export default {
 		return {
 			listTasks: Tasks,
 			isShowForm: false,
-			strSearch: 'aaa'
+			strSearch: ''
 		}
 	},
 	components: {
@@ -32,6 +32,19 @@ export default {
 		ControlComp,
 		FormComp,
 		ListTasks
+	},
+	computed:{
+		listTaskSearch(){
+			const {strSearch} = this;
+			var newItems = [];
+			this.listTasks.forEach(function(item) {
+				if(item.taskName.includes(strSearch) === true) {
+					newItems.push(item);
+				}
+			})
+			return newItems
+			
+		}
 	},
 	methods: {
 		toggleForm(){
