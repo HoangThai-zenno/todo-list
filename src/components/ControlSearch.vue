@@ -4,7 +4,7 @@
             <input v-bind:value="strSearch"
                     v-on:input="handleSearch"    type="text" class="form-control" placeholder="Search for..." />
             <span class="input-group-append">
-                <button class="btn btn-info" type="button">Clear!</button>
+                <button v-on:click="handleClearSearch" class="btn btn-info" type="button">Clear!</button>
             </span>
         </div>
     </b-col>
@@ -19,6 +19,9 @@ export default {
     methods: {
         handleSearch(e){
             this.$emit('handleSearch', e.target.value);
+        },
+        handleClearSearch(){
+            this.$emit('handleSearch','');
         }
     }
 }
