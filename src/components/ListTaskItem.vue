@@ -32,7 +32,7 @@ export default {
 
     methods: {
         handleDelete() {
-            if (confirm("Are you sure you want to delete " +"' "+ this.list.taskName + " '")) {
+            if (confirm("Are you sure you want to delete Task " +"' "+ this.list.taskName + " ' ?")) {
                 this.$emit('handleDelete', this.list)
             }
         },
