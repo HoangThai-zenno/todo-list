@@ -7,7 +7,7 @@
 					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
 				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" />
 			</b-row>
-			<list-tasks v-bind:listTasks="listTaskSearch" />
+			<list-tasks v-bind:listTasks="listTasksSort" />
 		</b-container>
 	</div>
 </template>
@@ -48,10 +48,31 @@ export default {
 			// 	}
 			// })
 			return newItems
-
+		},
+		listTasksSort(){
+			var listTask = [...this.listTaskSearch];
+			if(this.orderBy === 'name'){
+				listTask.sort(this.compareName);
+			} else if(this.orderBy === 'level'){
+				listTask.sort(this.compareLevel);
+			}
+			return listTask;
 		}
+
 	},
 	methods: {
+		compareName(a,b){
+			var numberSort = this.orderDir === 'asc' ? -1 : 1;
+			if(a.taskName < b.taskName) return numberSort;
+			else if(a.taskName > b.taskName) return numberSort * (-1);
+			return 0;
+		},
+		compareLevel(a,b){
+			var numberSort = this.orderDir === 'asc' ? -1 : 1;
+			if(a.level < b.level) return numberSort;
+			else if(a.level > b.level) return numberSort * (-1);
+			return 0;
+		},
 		toggleForm() {
 			this.isShowForm = !this.isShowForm
 		},
@@ -59,7 +80,6 @@ export default {
 			this.strSearch = data;
 		},
 		handleSort(orderBy, orderDir) {
-			console.log(orderDir, orderBy)
 			this.orderBy = orderBy;
 			this.orderDir = orderDir;
 		}

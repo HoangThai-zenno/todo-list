@@ -22,7 +22,6 @@ export default {
     },
     methods:{
         handleSort(orderBy, orderDir) {
-            console.log(orderBy, orderDir);
             this.$emit('handleSort', orderBy, orderDir);
         }
     }

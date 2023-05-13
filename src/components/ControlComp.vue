@@ -31,9 +31,8 @@ export default {
 			this.$emit('handleSearch', data)
 
 		},
-		handleSort(orderBy, orderByDir) {
-			console.log(orderBy, orderByDir);
-			this.$emit('handleSort', orderBy, orderByDir)
+		handleSort(orderBy, orderDir) {
+			this.$emit('handleSort', orderBy, orderDir)
 		}
 	}
 }

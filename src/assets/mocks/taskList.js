@@ -8,7 +8,7 @@ export default [
     },
     {
         id: uuidv4(),
-        taskName: 'B sss2',
+        taskName: 'E sss2',
         level: 1
     },
     {
@@ -19,6 +19,11 @@ export default [
     {
         id: uuidv4(),
         taskName: 'D sss4',
+        level: 2
+    },
+    {
+        id: uuidv4(),
+        taskName: 'EE sss4',
         level: 2
     }
 ]
