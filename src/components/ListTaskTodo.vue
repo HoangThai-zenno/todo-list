@@ -18,6 +18,7 @@
                 v-for="(list,index) in listTasks" 
                 v-bind:key="list.id"
                 v-on:handleDelete="handleDelete"
+                v-on:handleEdit="handleEdit"
                 />
 
             </tbody>
@@ -49,9 +50,11 @@ export default {
     },
 
     methods:{
-        handleDelete(taskDel){
-            
+        handleDelete(taskDel){           
             this.$emit('handleDelete',taskDel)
+        },
+        handleEdit(taskEdit){
+            this.$emit('handleEdit',taskEdit)
         }
     }
 }

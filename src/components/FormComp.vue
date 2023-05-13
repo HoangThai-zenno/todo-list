@@ -18,7 +18,9 @@
                 </select>
             </div>
 
-            <button @click="handleAddnew" type="button" class="btn btn-primary">Submit</button>
+            <button v-if="taskSelected === null" @click="handleAddnew" type="button" class="btn btn-primary">Submit</button>
+            <button v-else @click="handleEditTask" type="button" class="btn btn-primary">Update</button>
+
             <button v-on:click="handleCancle" type="button" class="btn btn-secondary">Cancel</button>
         </form>
     </b-col>
@@ -31,7 +33,8 @@ import { v4 as uuidv4 } from 'uuid';
 export default {
     name: 'form-comp',
     props: {
-        isShowForm: { type: Boolean, defaultValue: false }
+        isShowForm: { type: Boolean, defaultValue: false },
+        taskSelected: { type: Object, defaultValue: null }
     },
     data() {
         return {
@@ -42,14 +45,36 @@ export default {
     components: {
         FormAdd
     },
+    watch: {
+        taskSelected: function (newData, oldData) {
+            if (newData !== null) {
+            this.taskName = newData.taskName;
+            this.level = newData.level;
+        }
+            console.log(newData,oldData);
+        }
+
+    },
+    beforeUpdate() {
+        
+    },
     methods: {
+        handleEditTask(){
+            let objTask = {
+				id: this.taskSelected.id,
+                taskName: this.taskName,
+                level: parseInt(this.level)
+			}
+            this.$emit('handleEditTask',objTask)
+            this.handleResetData()
+        },
         handleAddnew() {
             let obj = {
                 id: uuidv4(),
                 taskName: this.taskName,
                 level: parseInt(this.level)
             }
-            if(this.taskName !== ''){
+            if (this.taskName !== '') {
                 this.$emit('handelAddnew', obj);
                 this.handleCancle();
             } else alert('Task name is required !');
@@ -61,9 +86,9 @@ export default {
             this.$emit('handelToggleForm')
             this.handleResetData()
         },
-        handleResetData(){
+        handleResetData() {
             this.taskName = '',
-            this.level = 0
+                this.level = 0
         }
     }
 }

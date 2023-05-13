@@ -5,9 +5,9 @@
 			<b-row>
 				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" v-bind:orderBy="orderBy"
 					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
-				<form-comp v-bind:isShowForm="isShowForm" v-on:handelToggleForm="handelToggleForm" v-on:handelAddnew="handelAddnew" />
+				<form-comp v-on:handleEditTask="handleEditTask" v-bind:taskSelected="taskSelected" v-bind:isShowForm="isShowForm" v-on:handelToggleForm="handelToggleForm" v-on:handelAddnew="handelAddnew" />
 			</b-row>
-			<list-tasks v-on:handleDelete="handleDelete" v-bind:listTasks="listTasksSort" />
+			<list-tasks v-on:handleDelete="handleDelete" v-bind:listTasks="listTasksSort" v-on:handleEdit="handleEdit"/>
 		</b-container>
 	</div>
 </template>
@@ -27,7 +27,8 @@ export default {
 			isShowForm: false,
 			strSearch: '',
 			orderBy: "name",
-			orderDir: "asc"
+			orderDir: "asc",
+			taskSelected: null
 		}
 	},
 	components: {
@@ -60,10 +61,26 @@ export default {
 		}
 
 	},
+	// created(){
+	// 	console.log(localStorage.getItem('tasks'));
+	// },
 	methods: {
+		handleEditTask(objTask){
+			let index = this.listTasks.findIndex(item => item.id === objTask.id);
+			if(index != -1) {
+				this.listTasks.splice(index, 1, objTask);
+				this.handelToggleForm();
+			}
+			console.log(objTask)
+		},
 		handelAddnew(taskNew){
 			console.log(taskNew, 'appVue');
 			this.listTasks.push(taskNew);
+		},
+		handleEdit(taskEdit){
+			this.isShowForm = true;
+			this.taskSelected = taskEdit;
+			console.log(this, 'appVue');
 		},
 		handleDelete(taskDel){
 			//cách 1
@@ -93,7 +110,8 @@ export default {
 			return 0;
 		},
 		handelToggleForm() {
-			this.isShowForm = !this.isShowForm
+			if(this.isShowForm)this.taskSelected = null;
+			this.isShowForm = !this.isShowForm;
 		},
 		handleSearch(data) {
 			this.strSearch = data;
