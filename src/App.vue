@@ -5,7 +5,7 @@
 			<b-row>
 				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" v-bind:orderBy="orderBy"
 					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
-				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" />
+				<form-comp v-bind:isShowForm="isShowForm" v-on:handelToggleForm="handelToggleForm" v-on:handelAddnew="handelAddnew" />
 			</b-row>
 			<list-tasks v-on:handleDelete="handleDelete" v-bind:listTasks="listTasksSort" />
 		</b-container>
@@ -61,6 +61,10 @@ export default {
 
 	},
 	methods: {
+		handelAddnew(taskNew){
+			console.log(taskNew, 'appVue');
+			this.listTasks.push(taskNew);
+		},
 		handleDelete(taskDel){
 			//cách 1
 			this.listTasks = this.listTasks.filter(item => item.id !== taskDel.id)
@@ -78,8 +82,8 @@ export default {
 		},
 		compareName(a,b){
 			var numberSort = this.orderDir === 'asc' ? -1 : 1;
-			if(a.taskName < b.taskName) return numberSort;
-			else if(a.taskName > b.taskName) return numberSort * (-1);
+			if(a.taskName.toLowerCase() < b.taskName.toLowerCase()) return numberSort;
+			else if(a.taskName.toLowerCase() > b.taskName.toLowerCase()) return numberSort * (-1);
 			return 0;
 		},
 		compareLevel(a,b){
@@ -88,7 +92,7 @@ export default {
 			else if(a.level > b.level) return numberSort * (-1);
 			return 0;
 		},
-		toggleForm() {
+		handelToggleForm() {
 			this.isShowForm = !this.isShowForm
 		},
 		handleSearch(data) {

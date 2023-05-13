@@ -12,7 +12,7 @@ export default {
     },
     methods: {
         onCLickAdd(){
-            this.$emit('handelAddTask')
+            this.$emit('handelToggleForm')
         }
     }
 }
