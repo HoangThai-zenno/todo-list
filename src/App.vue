@@ -7,7 +7,7 @@
 					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
 				<form-comp v-bind:isShowForm="isShowForm" v-on:toggleForm="toggleForm" />
 			</b-row>
-			<list-tasks v-bind:listTasks="listTasksSort" />
+			<list-tasks v-on:handleDelete="handleDelete" v-bind:listTasks="listTasksSort" />
 		</b-container>
 	</div>
 </template>
@@ -61,6 +61,21 @@ export default {
 
 	},
 	methods: {
+		handleDelete(taskDel){
+			//cách 1
+			this.listTasks = this.listTasks.filter(item => item.id !== taskDel.id)
+			// console.log('appVue',newItems)
+			//cách 2
+			// var idexDel = -1;
+			// for(var index = 0; index < this.listTasks.length; index++){
+			// 	if(this.listTasks[index].id == taskDel.id){
+
+			// 		idexDel = index;
+			// 		break;
+			// 	}
+			// }
+			// if(idexDel !== -1) this.listTasks.splice(idexDel, 1);
+		},
 		compareName(a,b){
 			var numberSort = this.orderDir === 'asc' ? -1 : 1;
 			if(a.taskName < b.taskName) return numberSort;

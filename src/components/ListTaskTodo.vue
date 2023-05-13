@@ -12,7 +12,13 @@
             </thead>
             <tbody v-if="listTasks.length !== 0">
 
-                <list-task-item v-bind:list="list" v-bind:index="index+1" v-for="(list,index) in listTasks" v-bind:key="list.id"/>
+                <list-task-item 
+                v-bind:list="list" 
+                v-bind:index="index+1" 
+                v-for="(list,index) in listTasks" 
+                v-bind:key="list.id"
+                v-on:handleDelete="handleDelete"
+                />
 
             </tbody>
             <tbody v-else>
@@ -40,6 +46,13 @@ export default {
     },
     components: {
         ListTaskItem
+    },
+
+    methods:{
+        handleDelete(taskDel){
+            
+            this.$emit('handleDelete',taskDel)
+        }
     }
 }
 </script>
