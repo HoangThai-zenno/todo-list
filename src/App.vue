@@ -3,13 +3,28 @@
 		<b-container>
 			<title-header />
 			<b-row>
-				<control-comp v-bind:strSearch="strSearch" v-on:handleSearch="handleSearch" v-bind:orderBy="orderBy"
-					v-bind:orderDir="orderDir" v-on:handleSort="handleSort" />
-				<form-comp v-on:handleEditTask="handleEditTask" v-bind:taskSelected="taskSelected"
-					v-bind:isShowForm="isShowForm" v-on:handelToggleForm="handelToggleForm"
-					v-on:handelAddnew="handelAddnew" />
+				<control-comp 
+					v-bind:strSearch = "strSearch" 
+					v-on:handleSearch = "handleSearch" 
+					v-bind:orderBy = "orderBy"
+					v-bind:orderDir = "orderDir" 
+					v-on:handleSort = "handleSort" 
+				/>
+
+				<form-comp 
+					v-on:handleEditTask = "handleEditTask" 
+					v-bind:taskSelected = "taskSelected"
+					v-bind:isShowForm = "isShowForm" 
+					v-on:handelToggleForm = "handelToggleForm"
+					v-on:handelAddnew = "handelAddnew" 
+				/>
 			</b-row>
-			<list-tasks v-on:handleDelete="handleDelete" v-bind:listTasks="listTasksSort" v-on:handleEdit="handleEdit" />
+
+			<list-tasks 
+				v-on:handleDelete = "handleDelete" 
+				v-bind:listTasks = "listTasksSort" 
+				v-on:handleEdit = "handleEdit" 
+			/>
 		</b-container>
 	</div>
 </template>
@@ -20,12 +35,12 @@ import ControlComp from './components/ControlComp.vue';
 import FormComp from './components/FormComp.vue';
 import ListTasks from './components/ListTaskTodo.vue';
 
-import Tasks from './assets/mocks/taskList'
 export default {
 	name: 'App',
+
 	data() {
 		return {
-			listTasks: Tasks,
+			listTasks: [],
 			isShowForm: false,
 			strSearch: '',
 			orderBy: "name",
@@ -33,31 +48,28 @@ export default {
 			taskSelected: null
 		}
 	},
+
 	components: {
 		TitleHeader,
 		ControlComp,
 		FormComp,
 		ListTasks
 	},
-	watch:{
-		listTasks: function(newTasks) {
+
+	watch: {
+		listTasks: function (newTasks) {
 			var tasksString = JSON.stringify(newTasks);
-				localStorage.setItem('tasks', tasksString);
-			console.log(tasksString)
+			localStorage.setItem('tasks', tasksString);
 		}
 	},
+
 	computed: {
 		listTaskSearch() {
 			const { strSearch } = this;
 			var newItems = this.listTasks.filter(item => {
 				return item.taskName.toLowerCase().includes(strSearch.toLowerCase())
 			});
-			// this.listTasks.forEach(function(item) {
-			// 	if(item.taskName.toLowerCase().includes(strSearch.toLowerCase())) {
-			// 		newItems.push(item);
-			// 	}
-			// })
-			return newItems
+			return newItems;
 		},
 		listTasksSort() {
 			var listTask = [...this.listTaskSearch];
@@ -71,7 +83,6 @@ export default {
 
 	},
 	created() {
-		console.log(localStorage.getItem('tasks'));
 		let tasks = localStorage.getItem('tasks');
 		if (tasks !== null) {
 			this.listTasks = JSON.parse(tasks);
@@ -80,6 +91,7 @@ export default {
 			this.listTasks = [];
 		}
 	},
+
 	methods: {
 		handleEditTask(objTask) {
 			let index = this.listTasks.findIndex(item => item.id === objTask.id);
@@ -87,10 +99,8 @@ export default {
 				this.listTasks.splice(index, 1, objTask);
 				this.handelToggleForm();
 			}
-			console.log(objTask)
 		},
 		handelAddnew(taskNew) {
-			console.log(taskNew, 'appVue');
 			this.listTasks.push(taskNew);
 		},
 		handleEdit(taskEdit) {
@@ -99,19 +109,7 @@ export default {
 			console.log(this, 'appVue');
 		},
 		handleDelete(taskDel) {
-			//cách 1
-			this.listTasks = this.listTasks.filter(item => item.id !== taskDel.id)
-			// console.log('appVue',newItems)
-			//cách 2
-			// var idexDel = -1;
-			// for(var index = 0; index < this.listTasks.length; index++){
-			// 	if(this.listTasks[index].id == taskDel.id){
-
-			// 		idexDel = index;
-			// 		break;
-			// 	}
-			// }
-			// if(idexDel !== -1) this.listTasks.splice(idexDel, 1);
+			this.listTasks = this.listTasks.filter(item => item.id !== taskDel.id);
 		},
 		compareName(a, b) {
 			var numberSort = this.orderDir === 'asc' ? -1 : 1;

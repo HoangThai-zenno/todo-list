@@ -1,6 +1,7 @@
 <template>
-    <div class="card ">
+    <div class="card">
         <div class="card-header">List Task</div>
+
         <table class="table table-hover ">
             <thead>
                 <tr>
@@ -10,8 +11,8 @@
                     <th style="width: 160px">Action</th>
                 </tr>
             </thead>
-            <tbody v-if="listTasks.length !== 0">
 
+            <tbody v-if="listTasks.length !== 0">
                 <list-task-item 
                 v-bind:list="list" 
                 v-bind:index="index+1" 
@@ -20,8 +21,8 @@
                 v-on:handleDelete="handleDelete"
                 v-on:handleEdit="handleEdit"
                 />
-
             </tbody>
+
             <tbody v-else>
                 <tr>
                     <td colspan="4" style="text-align: center; color: rgb(189, 41, 41);">
@@ -29,8 +30,6 @@
                     </td>
                 </tr>
             </tbody>
-
-
         </table>
     </div>
 </template>
@@ -39,22 +38,24 @@
 import ListTaskItem from './ListTaskItem.vue';
 export default {
     name: 'list-tasks',
+
     props:{
         listTasks:{
             type: Array,
             defaultValue: []
         }
     },
+
     components: {
         ListTaskItem
     },
 
     methods:{
         handleDelete(taskDel){           
-            this.$emit('handleDelete',taskDel)
+            this.$emit('handleDelete',taskDel);
         },
         handleEdit(taskEdit){
-            this.$emit('handleEdit',taskEdit)
+            this.$emit('handleEdit',taskEdit);
         }
     }
 }
